@@ -1,61 +1,136 @@
-
-<!-- ...existing content above... -->
-
-  <section id="cozy" class="vibe cozy">
-    <!-- ...cozy content... -->
-  </section>
-
-  <section id="main" class="vibe main">
-    <!-- ...main character content... -->
-  </section>
-
-  <section id="productivity" class="vibe productivity">
-    <!-- ...productivity content... -->
-  </section>
-
-  <section id="whimsigoth" class="vibe whimsigoth">
-    <!-- ...whimsigoth content... -->
-  </section>
-
-  <section id="tarot" class="vibe tarot">
-    <h2>🔮 Tarot Card Vibes</h2>
-    <div class="store">
-      <div class="product">
-        <img src="https://i.imgur.com/klX6mPH.png" alt="The Hermit Hoodie">
-        <h3>The Hermit Hoodie</h3>
-        <p>Cozy solitude, introspection not included (but encouraged).</p>
-        <button disabled>Inward</button>
-      </div>
-      <div class="product">
-        <img src="https://i.imgur.com/uhIE7G7.png" alt="Wheel of Fortune Fidget Spinner">
-        <h3>Wheel of Fortune Spinner</h3>
-        <p>Spin your fate with style and minimal existential dread.</p>
-        <button disabled>Spun Out</button>
-      </div>
-      <div class="product">
-        <img src="https://i.imgur.com/gY8O9MY.png" alt="Tower Card Stress Ball">
-        <h3>The Tower Stress Ball</h3>
-        <p>Because sometimes collapse is... therapeutic?</p>
-        <button disabled>Collapsed</button>
-      </div>
-    </div>
-  </section>
-
-  <div id="vibe-spinner" style="text-align:center;margin:3em auto">
-    <button onclick="spinMood()" style="font-size:1.2em;padding:0.5em 1em;border-radius:1em;background:#222;color:#fff;border:none;cursor:pointer">🎡 Spin the Mood Wheel</button>
-    <p id="mood-result" style="margin-top:1em;font-style:italic"></p>
-  </div>
-
-  <script>
-    function spinMood() {
-      const sections = document.querySelectorAll('section.vibe');
-      const moods = Array.from(sections).map(s => s.id);
-      const picked = moods[Math.floor(Math.random() * moods.length)];
-      document.getElementById('mood-result').textContent = `Your mood is: ${picked.replace(/-/g, ' ')} ✨`;
-      document.getElementById(picked).scrollIntoView({ behavior: 'smooth' });
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moodmart</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: #fdf6f0;
+      margin: 0;
+      padding: 2em;
+      scroll-behavior: smooth;
     }
-  </script>
+    nav {
+      position: sticky;
+      top: 0;
+      background: #fff8f4;
+      padding: 1em;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      display: flex;
+      gap: 1em;
+      justify-content: center;
+      z-index: 1000;
+    }
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+    section.vibe {
+      margin-bottom: 4em;
+      padding: 1em;
+      border-radius: 1em;
+      background: #fff;
+      box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    }
+    h2 {
+      font-size: 1.8em;
+    }
+    .store {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1em;
+      margin-top: 1em;
+    }
+    .product {
+      flex: 1 1 200px;
+      background: #fcefe3;
+      border-radius: 1em;
+      padding: 1em;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .product img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 0.5em;
+    }
+    .product button {
+      margin-top: 0.5em;
+      padding: 0.5em 1em;
+      background: #ccc;
+      border: none;
+      border-radius: 1em;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
 
-  <!-- existing chaotic & burnout sections -->
+<nav>
+  <a href="#cozy">Cozy</a>
+  <a href="#main">Main Character</a>
+  <a href="#productivity">Productivity</a>
+  <a href="#whimsigoth">Whimsigothcore</a>
+  <a href="#tarot">Tarot</a>
+</nav>
 
-  <!-- ...script remains unchanged... -->
+<section id="cozy" class="vibe cozy">
+  <!-- ...cozy content... -->
+</section>
+
+<section id="main" class="vibe main">
+  <!-- ...main character content... -->
+</section>
+
+<section id="productivity" class="vibe productivity">
+  <!-- ...productivity content... -->
+</section>
+
+<section id="whimsigoth" class="vibe whimsigoth">
+  <!-- ...whimsigoth content... -->
+</section>
+
+<section id="tarot" class="vibe tarot">
+  <h2>🔮 Tarot Card Vibes</h2>
+  <div class="store">
+    <div class="product">
+      <img src="https://i.imgur.com/klX6mPH.png" alt="The Hermit Hoodie">
+      <h3>The Hermit Hoodie</h3>
+      <p>Cozy solitude, introspection not included (but encouraged).</p>
+      <button disabled>Inward</button>
+    </div>
+    <div class="product">
+      <img src="https://i.imgur.com/uhIE7G7.png" alt="Wheel of Fortune Fidget Spinner">
+      <h3>Wheel of Fortune Spinner</h3>
+      <p>Spin your fate with style and minimal existential dread.</p>
+      <button disabled>Spun Out</button>
+    </div>
+    <div class="product">
+      <img src="https://i.imgur.com/gY8O9MY.png" alt="Tower Card Stress Ball">
+      <h3>The Tower Stress Ball</h3>
+      <p>Because sometimes collapse is... therapeutic?</p>
+      <button disabled>Collapsed</button>
+    </div>
+  </div>
+</section>
+
+<div id="vibe-spinner" style="text-align:center;margin:3em auto">
+  <button onclick="spinMood()" style="font-size:1.2em;padding:0.5em 1em;border-radius:1em;background:#222;color:#fff;border:none;cursor:pointer">🎡 Spin the Mood Wheel</button>
+  <p id="mood-result" style="margin-top:1em;font-style:italic"></p>
+</div>
+
+<script>
+  function spinMood() {
+    const sections = document.querySelectorAll('section.vibe');
+    const moods = Array.from(sections).map(s => s.id);
+    const picked = moods[Math.floor(Math.random() * moods.length)];
+    document.getElementById('mood-result').textContent = `Your mood is: ${picked.replace(/-/g, ' ')} ✨`;
+    document.getElementById(picked).scrollIntoView({ behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
