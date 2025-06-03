@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mood Mart</title>
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       font-family: 'Comic Sans MS', cursive, sans-serif;
       background: linear-gradient(135deg, #f7d6e0, #d2e0f7);
@@ -22,13 +25,44 @@
     .tagline {
       font-size: 1.2rem;
       color: #777;
+      margin-bottom: 1rem;
+    }
+    .filter {
+      margin-bottom: 1rem;
+    }
+    select, input[type="text"] {
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid #aaa;
+      font-size: 1rem;
+      margin-right: 1rem;
+    }
+    nav {
       margin-bottom: 2rem;
+    }
+    nav a {
+      margin: 0 1rem;
+      text-decoration: none;
+      color: #555;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: #000;
+    }
+    section {
+      margin-bottom: 4rem;
+      width: 100%;
+      max-width: 1000px;
+    }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: left;
     }
     .store {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 2rem;
-      max-width: 1000px;
       width: 100%;
     }
     .product {
@@ -47,7 +81,7 @@
       border-radius: 0.5rem;
       margin-bottom: 1rem;
     }
-    .product h2 {
+    .product h3 {
       font-size: 1.5rem;
       margin-bottom: 0.5rem;
     }
@@ -69,25 +103,92 @@
 <body>
   <h1>Mood Mart</h1>
   <p class="tagline">Shop Your Vibe. Not Real. Just Aesthetic.</p>
-  <div class="store">
-    <div class="product">
-      <img src="https://i.imgur.com/kWsp0Da.png" alt="Overthinking Hoodie">
-      <h2>Overthinking Hoodie</h2>
-      <p>Comes with a free spiral of doubt. Super soft, mildly stressful.</p>
-      <button disabled>Out of Stock</button>
-    </div>
-    <div class="product">
-      <img src="https://i.imgur.com/dZlUoRn.png" alt="Main Character Energy Perfume">
-      <h2>Main Character Energy Perfume</h2>
-      <p>Smells like plot armor, indie music, and a rainy climax scene.</p>
-      <button disabled>Sold Out</button>
-    </div>
-    <div class="product">
-      <img src="https://i.imgur.com/URyT45W.png" alt="Social Battery Charger">
-      <h2>Social Battery Charger</h2>
-      <p>Plug it in. Stay inside. Recharges introverts in 8-12 hours.</p>
-      <button disabled>404: Not Found</button>
-    </div>
+
+  <div class="filter">
+    <label for="vibeFilter">Filter by Vibe: </label>
+    <select id="vibeFilter" onchange="filterVibes()">
+      <option value="all">Show All</option>
+      <option value="cozy">Cozy Crisis</option>
+      <option value="main">Main Character</option>
+      <option value="productivity">Productivity-ish</option>
+      <option value="chaotic">Chaotic Neutral</option>
+      <option value="burnout">Romanticizing Burnout</option>
+    </select>
+
+    <input type="text" id="searchInput" oninput="searchProducts()" placeholder="Search products...">
   </div>
+
+  <nav>
+    <a href="#cozy">Cozy Crisis</a>
+    <a href="#main">Main Character</a>
+    <a href="#productivity">Productivity-ish</a>
+    <a href="#chaotic">Chaotic Neutral</a>
+    <a href="#burnout">Romanticizing Burnout</a>
+  </nav>
+
+  <!-- Existing sections remain unchanged -->
+
+  <section id="chaotic" class="vibe chaotic">
+    <h2>🎲 Chaotic Neutral</h2>
+    <div class="store">
+      <div class="product">
+        <img src="https://i.imgur.com/bD9FMyq.png" alt="Unstable Schedule Dice">
+        <h3>Unstable Schedule Dice</h3>
+        <p>Roll to see when (or if) you'll show up today.</p>
+        <button disabled>Rolled Away</button>
+      </div>
+      <div class="product">
+        <img src="https://i.imgur.com/hxoqtJm.png" alt="Spontaneity Spray">
+        <h3>Spontaneity Spray</h3>
+        <p>One spritz and you’re changing majors or cities — again.</p>
+        <button disabled>Out of Control</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="burnout" class="vibe burnout">
+    <h2>🔥 Romanticizing Burnout</h2>
+    <div class="store">
+      <div class="product">
+        <img src="https://i.imgur.com/RIrlKPg.png" alt="Aesthetic Overwhelm Planner">
+        <h3>Aesthetic Overwhelm Planner</h3>
+        <p>Color-coded chaos to make your stress look cute.</p>
+        <button disabled>Too Booked</button>
+      </div>
+      <div class="product">
+        <img src="https://i.imgur.com/jlDDUEz.png" alt="Mood Lighting for Deadline Despair">
+        <h3>Mood Lighting for Deadline Despair</h3>
+        <p>Turn in tears under LED glow. Vibe responsibly.</p>
+        <button disabled>Dimmed</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function filterVibes() {
+      const value = document.getElementById('vibeFilter').value;
+      const sections = document.querySelectorAll('.vibe');
+      sections.forEach(section => {
+        if (value === 'all' || section.classList.contains(value)) {
+          section.style.display = 'block';
+        } else {
+          section.style.display = 'none';
+        }
+      });
+    }
+
+    function searchProducts() {
+      const input = document.getElementById('searchInput').value.toLowerCase();
+      const products = document.querySelectorAll('.product');
+      products.forEach(product => {
+        const text = product.innerText.toLowerCase();
+        if (text.includes(input)) {
+          product.style.display = 'block';
+        } else {
+          product.style.display = 'none';
+        }
+      });
+    }
+  </script>
 </body>
 </html>
